@@ -1,0 +1,46 @@
+{
+    "name": "collgus/collgus",
+    "description": "Improve Testing interfaces",
+    "type": "library",
+    "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "Collgus\\": "src/",
+            "Test\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4",
+        "phpstan/phpstan": "^0.11.16"
+    },
+    "license": "Apache 2.0",
+    "authors": [
+        {
+            "name": "Lukas Grajewsky",
+            "email": "grajewski.lukasz@wp.pl"
+        }
+    ],
+    "repositories": {
+        "class-file-generator": {
+          "type": "path",
+          "url": "../class-file-generator",
+          "options": {
+            "symlink": true
+          }
+        },
+        "exceptions": {
+            "type": "path",
+            "url": "../exceptions",
+            "options": {
+              "symlink": true
+            }
+          }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "collgus/class-file-generator": "@dev",
+        "collgus/exceptions": "@dev"
+    }
+}
