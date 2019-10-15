@@ -1,16 +1,16 @@
 <?php 
 namespace Collgus\Factory;
 
+use Collgus\Factory;
 use ReflectionClass;
-use Collgus\GF\Factory;
-use Collgus\GF\ClassGenerator;
 use Collgus\GF\Content;
+use Collgus\GF\ClassGenerator;
 use Collgus\GF\Content\ClassContent;
 use Collgus\GF\Content\FileClassContent;
 use Collgus\GF\Exception\InvalidArgsException;
 
 class InterfaceReflectionFactory implements Factory {
-
+    
     /** 
      * @var ReflectionClass $reflection
      */
@@ -30,10 +30,20 @@ class InterfaceReflectionFactory implements Factory {
         $this->reflection = new ReflectionClass($interface);
         $this->generator = $generator;
         
-        // $this->generator->generate($this->buildContent());
+        $this->generator->generate($this->buildContent($interface, $this->reflection));
     }
-    /*private function buidClassContent(ReflectionClass $reflectionClass): Content {
-        return null;
-        return new ClassContent($reflectionClass->getName(), $reflectionClass->getInterfaces(), );
-    } */
+    private function buidClassContent(string $interface, ReflectionClass $reflectionClass): Content {
+        $mapInterfaces = array_map( function(ReflectionClass $interfaceReflection) {
+
+        }, $reflectionClass->getInterfaces());
+        return new ClassContent($reflectionClass->getName(), array_merge($mapInterfaces, [$interface]), $this->buildMethods($reflectionClass));
+    }
+    /** 
+     * @param ReflectionClass $reflectionInterface
+     * @return Array<Content>
+     */
+    private function buildMethods(ReflectionClass $relfectionInterface): array {
+        $resultArr = [];
+        return $resultArr;
+    }
 }
