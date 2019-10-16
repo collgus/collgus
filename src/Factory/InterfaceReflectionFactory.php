@@ -7,7 +7,11 @@ use Collgus\GF\Content;
 use Collgus\GF\ClassGenerator;
 use Collgus\GF\Content\ClassContent;
 use Collgus\GF\Content\FileClassContent;
+use Collgus\GF\Content\MethodWithPropertiesContent;
+use Collgus\GF\Content\ParamContent;
 use Collgus\GF\Exception\InvalidArgsException;
+use ReflectionMethod;
+use ReflectionParameter;
 
 class InterfaceReflectionFactory implements Factory {
     
@@ -44,6 +48,18 @@ class InterfaceReflectionFactory implements Factory {
      */
     private function buildMethods(ReflectionClass $relfectionInterface): array {
         $resultArr = [];
+        foreach ($relfectionInterface->getMethods() as $reflectMethod) {
+            $content = new MethodWithPropertiesContent($reflectMethod->getName(), $reflectMethod->getPa);
+        }
         return $resultArr;
+    } 
+    /** 
+     * @param ReflectionMethod $refMethod
+     * @return  Array<Content>
+     */
+    private function buildParameters(ReflectionMethod $refMethod): array {
+        return array_map(function(ReflectionParameter $param) {
+            return new ParamContent($param->getType(), $param->getName());
+        }, $refMethod->getParameters());
     }
 }
