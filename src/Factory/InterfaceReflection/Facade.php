@@ -8,15 +8,15 @@ use Collgus\Factory\InterfaceReflection\InterfaceReflectionFactory;
 
 class Facade {
     /** 
-     * @var MethodBuilder
+     * @var MethodBuilder|null
      */
     private static $methodBuilder;
     /** 
-     * @var ParametersBuilder
+     * @var ParametersBuilder|null
      */
     private static $paramsBuilder;
     /** 
-     * @var PropertiesBuilder
+     * @var PropertiesBuilder|null
      */
     private static $propsBuilder;
 
@@ -26,19 +26,19 @@ class Facade {
     }
 
     private static function methodBuilder(): MethodBuilder {
-        if (!self::$methodBuilder) {
+        if (is_null(self::$methodBuilder)) {
             self::$methodBuilder = new MethodBuilder(self::paramsBuilder(), self::propsBuilder());
         }
         return self::$methodBuilder;
     }
     private static function paramsBuilder(): ParametersBuilder {
-        if (!self::$paramsBuilder) {
+        if (is_null(self::$paramsBuilder)) {
             self::$paramsBuilder = new ParametersBuilder();
         }
         return self::$paramsBuilder;
     }
     private static function propsBuilder(): PropertiesBuilder {
-        if (!self::$propsBuilder) {
+        if (is_null(self::$propsBuilder)) {
             self::$propsBuilder = new PropertiesBuilder();
         }
         return self::$propsBuilder;

@@ -1,10 +1,12 @@
 <?php 
 namespace Collgus\Factory\InterfaceReflection\Helpers;
 
+use Collgus\Helper\StringHelper;
 
 class PropertiesBuilder {
     public function getNormalizedProperty(string $methodName): string {
-        // cut off "get" and "Set" keywords and return offset string 
-        return "";
+        $normalizedName = trim(strtolower($methodName));
+        $cutoff = ["get", "set"];
+        return StringHelper::instance()->cutoffSubStrings($cutoff, $normalizedName);
     }
 }

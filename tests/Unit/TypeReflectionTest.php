@@ -16,7 +16,7 @@ class TypeReflectionTest  extends \PHPUnit\Framework\TestCase {
         parent::setUp();
         $this->reflectionCls = new ReflectionClass(new TestDomain());
     }
-    private function equalsType(string $expect, ReflectionType $type): void {
+    private function equalsType(string $expect, ?ReflectionType $type): void {
         $this->assertEquals(strtolower(trim($expect)), TypeReflection::getStringTypeFromReflection($type));
     } 
     public function testStringType() {
