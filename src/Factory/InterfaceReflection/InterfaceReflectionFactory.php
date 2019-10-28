@@ -13,7 +13,7 @@ use Collgus\GF\Content\ParamContent;
 use Collgus\GF\Content\GetterContent;
 use Collgus\GF\Content\SetterContent;
 use Collgus\GF\Content\FileClassContent;
-use Collgus\GF\Exception\InvalidArgsException;
+use Collgus\Exception\InvalidArgsException;
 use Collgus\GF\Content\MethodWithPropertiesContent;
 use Collgus\Factory\InterfaceReflection\Helpers\MethodBuilder;
 use Collgus\Factory\InterfaceReflection\Helpers\ParametersBuilder;

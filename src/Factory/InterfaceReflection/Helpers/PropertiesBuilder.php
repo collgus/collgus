@@ -1,12 +1,18 @@
 <?php 
 namespace Collgus\Factory\InterfaceReflection\Helpers;
 
-use Collgus\Helper\StringHelper;
+use Collgus\Factory\InterfaceReflection\Helpers\Traits\NormalizedNames;
+use ReflectionMethod;
 
 class PropertiesBuilder {
-    public function getNormalizedProperty(string $methodName): string {
-        $normalizedName = trim(strtolower($methodName));
-        $cutoff = ["get", "set"];
-        return StringHelper::instance()->cutoffSubStrings($cutoff, $normalizedName);
+    use NormalizedNames;
+    /** 
+     * @var Array<Content>
+     */
+    private $properties = [];
+
+
+    public function buildParameters(ReflectionMethod $relatedMethod): void {
+
     }
 }

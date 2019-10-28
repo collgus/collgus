@@ -5,9 +5,13 @@ use ReflectionClass;
 use ReflectionMethod;
 use Collgus\GF\Content;
 use Collgus\GF\Content\GetterContent;
+use Collgus\GF\Content\MethodContent;
 use Collgus\GF\Content\SetterContent;
+use Collgus\GF\Content\PropertyContent;
 use Collgus\Exception\InvalidArgsException;
 use Collgus\GF\Content\MethodWithPropertiesContent;
+use Collgus\Factory\InterfaceReflection\Helpers\ParametersBuilder;
+use Collgus\Factory\InterfaceReflection\Helpers\PropertiesBuilder;
 
 class MethodBuilder {
     /** 
@@ -43,12 +47,18 @@ class MethodBuilder {
     public function buildMethod(ReflectionMethod $reflectionMethod): Content {
         $body = "";
         $propertyName  = $this->propsBuilder->getNormalizedProperty($reflectionMethod->getName());
-        if (strpos($reflectMethod->getName(), "get")) {
-            $body = new GetterContent($propertyName);
-        } else if (strpos($reflectMethod->getName(), "set")) {
+        $properties = null;
+        if (is_integer(strpos($reflectionMethod->getName(), "set"))) {
             $body = new SetterContent($propertyName, "val");
+        } else {
+            $body = new GetterContent($propertyName);
+            $properties = [ new PropertyContent($propertyName)];
         }
-        $content = new MethodWithPropertiesContent($reflectMethod->getName(), $this->buildParameters($reflectMethod), );
-        return  null;
+        $content = new MethodContent($reflectionMethod->getName(), $this->paramsBuilder->buildParameters($reflectionMethod), $body, $reflectionMethod->getReturnType()->__toString());
+        return  $content;
+    }
+
+    public function buildProperties(ReflectionMethod $relativeMethod): ?array {
+        
     }
 }
