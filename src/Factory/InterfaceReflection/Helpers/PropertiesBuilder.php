@@ -11,7 +11,6 @@ class PropertiesBuilder {
      */
     private $properties = [];
 
-
     public function buildParameters(ReflectionMethod $relatedMethod): void {
 
     }

@@ -17,15 +17,14 @@ class MethodBuilder {
     /** 
      * @var PropertiesBuilder
      */
-    protected $propsBuilder;
+    protected $propsBuilder; 
     /** 
      * @var ParametersBuilder
      */
     protected $paramsBuilder;
 
-    public function __construct(ParametersBuilder $paramsBuilder, PropertiesBuilder $propsBuilder) {
+    public function __construct(ParametersBuilder $paramsBuilder) {
         $this->paramsBuilder = $paramsBuilder;
-        $this->propsBuilder = $propsBuilder;
     }
     /** 
      * @param ReflectionClass $reflectionInterface
@@ -46,19 +45,17 @@ class MethodBuilder {
     }
     public function buildMethod(ReflectionMethod $reflectionMethod): Content {
         $body = "";
-        $propertyName  = $this->propsBuilder->getNormalizedProperty($reflectionMethod->getName());
-        $properties = null;
+        $propertyName  = $this->paramsBuilder->getNormalizedProperty($reflectionMethod->getName());
         if (is_integer(strpos($reflectionMethod->getName(), "set"))) {
             $body = new SetterContent($propertyName, "val");
         } else {
             $body = new GetterContent($propertyName);
-            $properties = [ new PropertyContent($propertyName)];
         }
         $content = new MethodContent($reflectionMethod->getName(), $this->paramsBuilder->buildParameters($reflectionMethod), $body, $reflectionMethod->getReturnType()->__toString());
         return  $content;
     }
 
     public function buildProperties(ReflectionMethod $relativeMethod): ?array {
-        
+
     }
 }
